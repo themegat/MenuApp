@@ -1,16 +1,27 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar >
     <ion-title>
-      Ionic Blank
+      <u class="white_text">Select an outlet</u>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="page_content" padding>
   <div class="masonry_">
-    <div class="masonry_item">Test 1</div>
-    <div class="masonry_item">Test 2</div>
-    <div class="masonry_item">Test 3</div>
-    <div class="masonry_item">Test 4</div>
+    <div class="masonry_item" (click)="openMenu('../../assets/imgs/KFC_Logo.png')">
+      <img class="restaurant_icon" src="../../assets/imgs/KFC_Logo.png" />
+    </div>
+    <div class="masonry_item" (click)="openMenu('../../assets/imgs/376px-Nandos_logo.svg.png')">
+      <img class="restaurant_icon" src="../../assets/imgs/376px-Nandos_logo.svg.png" />
+    </div>
+    <div class="masonry_item" (click)="openMenu('../../assets/imgs/Mcdonalds_logo.png')">
+      <img class="restaurant_icon" src="../../assets/imgs/Mcdonalds_logo.png" />
+    </div>
+    <div class="masonry_item" (click)="openMenu('../../assets/imgs/Debonaires-logo.jpg')">
+      <img class="restaurant_icon" src="../../assets/imgs/Debonaires-logo.jpg" />
+    </div>
+    <div class="masonry_item" (click)="openMenu('../../assets/imgs/Steers_Logo.jpg')">
+      <img class="restaurant_icon" src="../../assets/imgs/Steers_Logo.jpg" />
+    </div>
   </div>
 </ion-content>
