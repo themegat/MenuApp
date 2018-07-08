@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Menu } from 'ionic-angular/components/app/menu-interface';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'page-menu',
@@ -9,16 +9,34 @@ import {HttpClient} from '@angular/common/http';
 })
 export class MenuPage {
     search_icon: any;
-   public menu_list: Menu;
-private readonly url = "http://congos3.000webhostapp.com/menu.php?id=KFC";
+    public menu_list: Menu;
+    private readonly url = "http://congos3.000webhostapp.com/menu.php?id=KFC";
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient) {
         this.search_icon = navParams.get('data');
-        this.http.get(this.url).subscribe(data =>{
-            console.log(data);
-        }, err =>{
-            console.log(err);
-        });
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open('GET', this.url, true);
+
+        xmlHttp.withCredentials = true;
+        xmlHttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xmlHttp.setRequestHeader('Content-Type', 'application/json');
+
+        xmlHttp.onreadystatechange = function () {
+            console.log(xmlHttp.readyState);
+            if (xmlHttp.readyState === 4) {
+                console.log(xmlHttp.responseText);
+            } else {
+                console.log("xmlHttp error");
+            }
+        };
+
+        xmlHttp.send();
+
+        // this.http.get(this.url).subscribe(data =>{
+        //     console.log(data);
+        // }, err =>{
+        //     console.log(err);
+        // });
         // this.menu_list = [{
         //     name: "Brekkie Crunch Wrap",
         //     desc: "A delicious spicy mini fillet (Crunch fillet) egg and cheese with grilled tomato sauce all wrapped up in a mini tortilla. Only available at selected KFC breakfast stores from 6am – 10:30am.",
