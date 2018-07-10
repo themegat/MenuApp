@@ -9,17 +9,27 @@
 <ion-content>
     <div class="search_">
         <div class="search_bar">
-            <img class="searcb_bar_icon" src="{{search_icon}}" />
+            <ion-avatar item-start class="searcb_bar_icon">
+            <img  src="{{search_icon}}" />
+            </ion-avatar>
             <ion-searchbar></ion-searchbar>
         </div>
-        <p class="search_hint">Search by entering an item name or the category it belongs too. <i>e.g. type <b>burger</b> to see all <b>burgers</b></i></p>
+        <br>
+        <p class="search_hint">Search by entering an item name or the category it belongs too.
+            <i>e.g. type
+                <b>burger</b> to see all
+                <b>burgers</b>
+            </i>
+        </p>
     </div>
     <ion-list>
         <ion-item *ngFor="let item of menu_list" (click)="openItemDetails(item)">
             <ion-avatar item-start>
                 <img src={{item.image}} />
             </ion-avatar>
-            <h2><b>{{item.name}}</b></h2>
+            <h2>
+                <b>{{item.name}}</b>
+            </h2>
             <p>{{item.description}}</p>
         </ion-item>
     </ion-list>

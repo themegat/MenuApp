@@ -9,7 +9,7 @@ page-home {
 
 .masonry_item{
     background-color:none;
-    display: inline-flex;
+    // display: inline-flex;
     margin: 0 0 0.5em;
     width: 100%;
 }
@@ -24,4 +24,9 @@ page-home {
 
 .toolbar-background {
     background-color: #ea4a00;
+  }
+
+  .restaurant_icon{
+      width: 100%;
+      height: inherit;
   }

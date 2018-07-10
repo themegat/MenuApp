@@ -10,11 +10,11 @@ import {ItemDetailPage} from "../item-detail/item-detail";
 })
 export class MenuPage {
     search_icon: any;
-    private readonly RESTAURANT_LOGO = [{ name: "KFC", logoUrl: "../../assets/imgs/KFC_Logo.png" },
-    { name: "McDonalds", logoUrl: "../../assets/imgs/Mcdonalds_logo.png" },
-    { name: "NANDOS", logoUrl: "../../assets/imgs/376px-Nandos_logo.svg.png" },
-    { name: "DEBONAIRS", logoUrl: "../../assets/imgs/Debonaires-logo.jpg" },
-    { name: "STEERS", logoUrl: "../../assets/imgs/Steers_Logo.jpg" }]
+    private readonly RESTAURANT_LOGO = [{ name: "KFC", logoUrl: "assets/imgs/KFC_Logo.png" },
+    { name: "McDonalds", logoUrl: "assets/imgs/Mcdonalds_logo.png" },
+    { name: "NANDOS", logoUrl: "assets/imgs/376px-Nandos_logo.svg.png" },
+    { name: "DEBONAIRS", logoUrl: "assets/imgs/Debonaires-logo.jpg" },
+    { name: "STEERS", logoUrl: "assets/imgs/Steers_Logo.jpg" }]
     public menu_list: Menu[];
     private readonly url = "http://congos3.000webhostapp.com/menu.php?id=";
 

@@ -1,11 +1,12 @@
 .search_bar{
     width: 100%;
-    display: flex;
+    display: inline-flex;
     margin-bottom: -5%;
 }
 
 .searcb_bar_icon{
     width: 20%;
+    height: inherit;
     margin: 2% 2%;
 }
 
