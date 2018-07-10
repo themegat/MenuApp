@@ -28,7 +28,7 @@ $response = array("result" => "failde", "message" => "Could not process request.
 $select = "select * from customer_table where customer_username='" . $customer_username . "'";
 $insert = "insert into customer_table (customer_name, customer_surname, customer_username, customer_email, password) Values ('".$customer_name ."','".$customer_surname."','".$customer_username."','".$customer_email."','".$customer_password."')";
 if(strlen($customer_name) == 0 && strlen($customer_surname) == 0){
-    echo 'login';
+    // echo 'login';
     //perform login operation here
     $result = mysqli_query($conn, $select);
     if(mysqli_num_rows($result) > 0){
@@ -43,7 +43,7 @@ if(strlen($customer_name) == 0 && strlen($customer_surname) == 0){
         $response = array("result" => "failed", "message" => "User not found");
     }
 }else{
-    echo 'register';
+    // echo 'register';
     // perform registration operation here
     $result = mysqli_query($conn, $select);
 

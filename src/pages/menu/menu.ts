@@ -3,6 +3,7 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Menu } from 'ionic-angular/components/app/menu-interface';
 import { HttpClient } from '@angular/common/http';
 import { ItemDetailPage } from "../item-detail/item-detail";
+import { LoadingController } from "ionic-angular";
 
 @Component({
     selector: 'page-menu',
@@ -18,15 +19,20 @@ export class MenuPage {
     public menu_list: Menu[];
     private temp_menu_list;
     private readonly url = "http://congos3.000webhostapp.com/menu.php?id=";
+    public loading;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, private modalCtrl: ModalController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams,
+        private http: HttpClient, private modalCtrl: ModalController, public loadCtrl: LoadingController) {
         var restaurantName = navParams.get('data');
+
+        this.loading = this.loadCtrl.create({ content: "Loading menu ,please wait..." });
+        this.loading.present();
 
         for (let restaurant of this.RESTAURANT_LOGO) {
             if (restaurantName == restaurant.name) {
                 this.search_icon = restaurant.logoUrl;
                 this.http.get(this.url + restaurant.name).subscribe(data => {
-                    this.setMenuList(data);
+                    this.setMenuList(data, this.loading);
                 }, err => {
                     console.log("OOPS");
                     console.log(err);
@@ -36,9 +42,12 @@ export class MenuPage {
         }
     }
 
-    setMenuList(data) {
+    setMenuList(data, loader) {
         this.temp_menu_list = data;
         this.menu_list = this.temp_menu_list;
+        setTimeout(function(){
+            loader.dismiss();
+        }, 5000);
     }
 
     filterMenuList(searchBar) {
@@ -55,6 +64,10 @@ export class MenuPage {
         } else {
             this.menu_list = this.temp_menu_list;
         }
+    }
+
+    resetMenuList() {
+        this.menu_list = this.temp_menu_list;
     }
 
     openItemDetails(item: Menu) {
