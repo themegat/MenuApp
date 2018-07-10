@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,  ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Menu } from 'ionic-angular/components/app/menu-interface';
 import { HttpClient } from '@angular/common/http';
-import {ItemDetailPage} from "../item-detail/item-detail";
+import { ItemDetailPage } from "../item-detail/item-detail";
 
 @Component({
     selector: 'page-menu',
@@ -16,11 +16,12 @@ export class MenuPage {
     { name: "DEBONAIRS", logoUrl: "assets/imgs/Debonaires-logo.jpg" },
     { name: "STEERS", logoUrl: "assets/imgs/Steers_Logo.jpg" }]
     public menu_list: Menu[];
+    private temp_menu_list;
     private readonly url = "http://congos3.000webhostapp.com/menu.php?id=";
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private http: HttpClient, private modalCtrl: ModalController) {
         var restaurantName = navParams.get('data');
-       
+
         for (let restaurant of this.RESTAURANT_LOGO) {
             if (restaurantName == restaurant.name) {
                 this.search_icon = restaurant.logoUrl;
@@ -36,11 +37,28 @@ export class MenuPage {
     }
 
     setMenuList(data) {
-        this.menu_list = data;
+        this.temp_menu_list = data;
+        this.menu_list = this.temp_menu_list;
     }
 
-    openItemDetails(item:Menu){
-        var modal = this.modalCtrl.create(ItemDetailPage, {menuItem:item});
+    filterMenuList(searchBar) {
+        var filter = searchBar.target.value;
+
+        if (filter !== "") {
+            this.menu_list = [];
+            for (let item of this.temp_menu_list) {
+                if (item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
+                    item.category.toLowerCase().indexOf(filter.toLowerCase()) > -1) {
+                    this.menu_list.push(item);
+                }
+            }
+        } else {
+            this.menu_list = this.temp_menu_list;
+        }
+    }
+
+    openItemDetails(item: Menu) {
+        var modal = this.modalCtrl.create(ItemDetailPage, { menuItem: item });
         modal.present();
     }
 }

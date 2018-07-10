@@ -12,7 +12,7 @@
             <ion-avatar item-start class="searcb_bar_icon">
             <img  src="{{search_icon}}" />
             </ion-avatar>
-            <ion-searchbar></ion-searchbar>
+            <ion-searchbar (ionInput)="filterMenuList($event)"></ion-searchbar>
         </div>
         <br>
         <p class="search_hint">Search by entering an item name or the category it belongs too.
