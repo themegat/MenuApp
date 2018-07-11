@@ -1,27 +1,26 @@
 <ion-header>
-  <ion-navbar >
+  <ion-navbar>
     <ion-title>
-      <u class="white_text">Select a Restaurant</u>
+      <u class="white_text">Log in </u>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="page_content" padding>
-  <div class="masonry_">
-    <div class="masonry_item" (click)="openMenu('KFC')">
-      <img class="restaurant_icon" src="assets/imgs/KFC_Logo.png" />
-    </div>
-    <div class="masonry_item" (click)="openMenu('NANDOS')">
-      <img class="restaurant_icon" src="assets/imgs/376px-Nandos_logo.svg.png" />
-    </div>
-    <div class="masonry_item" (click)="openMenu('McDonalds')">
-      <img class="restaurant_icon" src="assets/imgs/Mcdonalds_logo.png" />
-    </div>
-    <div class="masonry_item" (click)="openMenu('DEBONAIRS')">
-      <img class="restaurant_icon" src="assets/imgs/Debonaires-logo.jpg" />
-    </div>
-    <div class="masonry_item" (click)="openMenu('STEERS')">
-      <img class="restaurant_icon" src="assets/imgs/Steers_Logo.jpg" />
-    </div>
+<ion-content padding centre text-centre>
+  <div class="form">
+    <ion-list>
+      <ion-item>
+        <ion-input placeholder="Username" required="true" [(ngModel)]="username"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input placeholder="Password" type="password" required="true" maxLength="10" [(ngModel)]="password"></ion-input>
+      </ion-item>
+
+    </ion-list>
   </div>
+  <br>
+  <button ion-button block (click)="Login()" class="btn_access">Log in</button>
+  <button ion-button block (click)="goRegister()" class="btn_access">Register </button>
+
 </ion-content>

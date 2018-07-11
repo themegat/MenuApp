@@ -1,0 +1,32 @@
+page-restaurants {
+
+}
+
+.masonry_{
+    column-count: 2;
+    column-gap: 1em;
+}
+
+.masonry_item{
+    background-color:none;
+    // display: inline-flex;
+    margin: 0 0 0.5em;
+    width: 100%;
+}
+
+.masonry_item:hover{
+    background-color: #eee;
+}
+
+.page_content{
+    background: #eee;
+}
+
+.toolbar-background {
+    background-color: #ea4a00;
+  }
+
+  .restaurant_icon{
+      width: 100%;
+      height: inherit;
+  }

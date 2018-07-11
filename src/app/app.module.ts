@@ -10,6 +10,8 @@ import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
 import { ItemDetailPage } from '../pages/item-detail/item-detail';
 import { OutletDetailsPage } from '../pages/outlet-details/outlet-details';
+import { RestaurantsPage} from '../pages/restaurants/restaurants';
+import { RegisterPage} from '../pages/Register/register';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { OutletDetailsPage } from '../pages/outlet-details/outlet-details';
     HomePage,
     MenuPage,
     ItemDetailPage,
-    OutletDetailsPage
+    OutletDetailsPage,
+    RestaurantsPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ import { OutletDetailsPage } from '../pages/outlet-details/outlet-details';
     HomePage,
     MenuPage,
     ItemDetailPage,
-    OutletDetailsPage
+    OutletDetailsPage,
+    RestaurantsPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
