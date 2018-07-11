@@ -15,6 +15,8 @@ if($conn->connect_error){
     echo "Failed to connect";
 }else{
     $data = array();
+    $menuAr = array();
+    $outletAr = array();
 
     $result = mysqli_query($conn, $select);
     if(mysqli_num_rows($result) > 0){
@@ -30,13 +32,23 @@ if($conn->connect_error){
                        $image = $restaurantName . "/" . str_replace(" ", "_", $row["meal_image"]);
                    }
                    $image = "http://congos3.000webhostapp.com/menu_app/" . $image;
-                   array_push($data, array('id' => $row["meal_id"], 'name' => $row["meal_name"], 
+                   array_push($menuAr, array('id' => $row["meal_id"], 'name' => $row["meal_name"], 
                    'description' => $row["meal_description"], 'price' => $row["meal_price"], 
                    'image' => $image, 'category' => $row["meal_category"]));
                }
            }
-         
-          echo json_encode($data);
+
+           $select = "select * from outlet_table where outlet_id=" . $id;
+           $result = mysqli_query($conn, $select);
+           if(mysqli_num_rows($result) > 0){
+               while($row = mysqli_fetch_assoc($result)){
+                   array_push($outletAr, array("store_id" => $row["store_id"], "alias" => $row["outlet_alias"],
+                   "address" => $row["outlet_address"], "contact" => $row["outlet_contact"]));
+               }
+           }
+
+        array_push($data, array("success" => TRUE, "menu" => $menuAr, "outlets" => $outletAr));
+        echo json_encode($data);
     }
     $conn->close();
 }

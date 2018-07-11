@@ -7,15 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import {MenuPage} from '../pages/menu/menu';
-import {ItemDetailPage} from '../pages/item-detail/item-detail';
+import { MenuPage } from '../pages/menu/menu';
+import { ItemDetailPage } from '../pages/item-detail/item-detail';
+import { OutletDetailsPage } from '../pages/outlet-details/outlet-details';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     MenuPage,
-    ItemDetailPage
+    ItemDetailPage,
+    OutletDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -27,12 +29,13 @@ import {ItemDetailPage} from '../pages/item-detail/item-detail';
     MyApp,
     HomePage,
     MenuPage,
-    ItemDetailPage
+    ItemDetailPage,
+    OutletDetailsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }

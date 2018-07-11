@@ -17,10 +17,17 @@ ion-searchbar{
 .search_{
     background: #eee;
     width: 100%;
+    padding: 0 0 4% 0;
 }
 
 .search_hint{
-    padding: 1% 2% 2% 2%;
+    padding: 1% 2% 0 2%;
     text-align: center;
     font-size: small;
+}
+
+#btnOrder{
+    width: 80%;
+    margin: -1% auto 0 auto;
+    background: #ea4a00;
 }

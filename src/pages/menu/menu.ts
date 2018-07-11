@@ -4,6 +4,8 @@ import { Menu } from 'ionic-angular/components/app/menu-interface';
 import { HttpClient } from '@angular/common/http';
 import { ItemDetailPage } from "../item-detail/item-detail";
 import { LoadingController } from "ionic-angular";
+import { Outlet} from '../../../interfaces/outlet';
+import { OutletDetailsPage} from '../outlet-details/outlet-details';
 
 @Component({
     selector: 'page-menu',
@@ -20,6 +22,7 @@ export class MenuPage {
     private temp_menu_list;
     private readonly url = "http://congos3.000webhostapp.com/menu.php?id=";
     public loading;
+    private outlet_list:Outlet[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
         private http: HttpClient, private modalCtrl: ModalController, public loadCtrl: LoadingController) {
@@ -32,7 +35,7 @@ export class MenuPage {
             if (restaurantName == restaurant.name) {
                 this.search_icon = restaurant.logoUrl;
                 this.http.get(this.url + restaurant.name).subscribe(data => {
-                    this.setMenuList(data, this.loading);
+                    this.setDataLists(data, this.loading);
                 }, err => {
                     console.log("OOPS");
                     console.log(err);
@@ -42,8 +45,9 @@ export class MenuPage {
         }
     }
 
-    setMenuList(data, loader) {
-        this.temp_menu_list = data;
+    setDataLists(data, loader) {
+        this.outlet_list = data[0].outlets;
+        this.temp_menu_list = data[0].menu;
         this.menu_list = this.temp_menu_list;
         setTimeout(function(){
             loader.dismiss();
@@ -72,6 +76,11 @@ export class MenuPage {
 
     openItemDetails(item: Menu) {
         var modal = this.modalCtrl.create(ItemDetailPage, { menuItem: item });
+        modal.present();
+    }
+
+    openOutletDetails(){
+        var modal = this.modalCtrl.create(OutletDetailsPage, {outlets:this.outlet_list});
         modal.present();
     }
 }

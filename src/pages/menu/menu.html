@@ -21,6 +21,7 @@
                 <b>burgers</b>
             </i>
         </p>
+        <button id="btnOrder" ion-button block small (click)="openOutletDetails()">Call a Restaurant</button>
     </div>
     <ion-list>
         <ion-item *ngFor="let item of menu_list" (click)="openItemDetails(item)">

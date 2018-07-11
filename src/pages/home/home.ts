@@ -13,9 +13,7 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
   }
 
-  openMenu(dataE) {
-    // console.log(data);
-    // let dataMe = data;
-    this.navCtrl.push(MenuPage, {data:dataE});
+  openMenu(data) {
+    this.navCtrl.push(MenuPage, {data:data});
   }
 }

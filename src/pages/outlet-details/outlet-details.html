@@ -1,0 +1,29 @@
+<!--
+  Generated template for the OutletDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <u class="white_text">Available Restaurants</u>
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon class="white_text" name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let outlet of outlet_list" (click)="expandParagraph(outlet.store_id)">
+      <h2><b>{{outlet.alias}}</b></h2>
+      <p class="p_expandable" id=p_{{outlet.store_id}}>{{outlet.address}}</p>
+      <ion-icon name="call" item-end (click)="callNumber(outlet.contact)"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
