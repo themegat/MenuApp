@@ -20,7 +20,7 @@
             </ion-item>
 
             <ion-item>
-                <ion-input placeholder="Username" required="true" [(ngModel)]="Username"></ion-input>
+                <ion-input placeholder="Username" required="true" minlength="3" maxlength="15" [(ngModel)]="Username"></ion-input>
             </ion-item>
 
 
@@ -28,7 +28,7 @@
                 <ion-input placeholder="Email" type="email" required="true" [(ngModel)]="Email"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-input placeholder="Password" type="password" maxLength="5" required="true" compose="true" [(ngModel)]="Password"></ion-input>
+                <ion-input placeholder="Password" type="password" minlength="5" maxLength="10" required="true" compose="true" [(ngModel)]="Password"></ion-input>
             </ion-item>
         </div>
         <br>
