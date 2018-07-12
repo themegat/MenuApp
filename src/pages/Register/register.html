@@ -1,38 +1,38 @@
-
-
 <ion-header>
-<ion-navbar>
-<ion-title> Register-Page</ion-title>
+    <ion-navbar>
+        <ion-title>
+            <u class="white_text">Register</u>
+        </ion-title>
     </ion-navbar>
-    </ion-header>
+</ion-header>
 
 <ion-content padding class="bg">
 
     <ion-list>
 
-        <div class="form" >
-           <ion-item>
-            <ion-input  placeholder="Name" required="true" [(ngModel)]="Name"></ion-input>
-           </ion-item>
-           
-           <ion-item>
-                <ion-input placeholder="Surname"  required="true" [(ngModel)]="Surname"></ion-input>
-               </ion-item>
+        <div class="form">
+            <ion-item>
+                <ion-input placeholder="Name" required="true" [(ngModel)]="Name"></ion-input>
+            </ion-item>
 
-               <ion-item>
-                    <ion-input placeholder="Username" required="true" [(ngModel)]="Username"></ion-input>
-                   </ion-item>
-                 
-                  
-                 <ion-item>
-                     <ion-input placeholder="Email"  type="email"  required="true"  [(ngModel)]="Email"  ></ion-input>
-                 </ion-item>  
-                       <ion-item>
-                            <ion-input placeholder="Password" type="password" maxLength="5"  required="true"  compose="true" [(ngModel)]="Password"></ion-input>
-                           </ion-item>
-                        </div>  
-                   
-                  <button       class="btn_Submit" type="submit" ion-button full color="light" (click)="register()" value="submit"  >  Register </button>      
-             
-        </ion-list>
-    </ion-content>
+            <ion-item>
+                <ion-input placeholder="Surname" required="true" [(ngModel)]="Surname"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input placeholder="Username" required="true" [(ngModel)]="Username"></ion-input>
+            </ion-item>
+
+
+            <ion-item>
+                <ion-input placeholder="Email" type="email" required="true" [(ngModel)]="Email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input placeholder="Password" type="password" maxLength="5" required="true" compose="true" [(ngModel)]="Password"></ion-input>
+            </ion-item>
+        </div>
+        <br>
+        <button class="btn_access" ion-button block (click)="register()">  Register </button>
+
+    </ion-list>
+</ion-content>

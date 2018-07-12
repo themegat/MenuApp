@@ -1,4 +1,5 @@
 <?php
+/*author: T Motsoeneng */
 //set this header to allow Cross Origin Resource Sharing CORS
 header("Access-Control-Allow-Origin: *");
 
@@ -25,12 +26,11 @@ if($conn->connect_error){
 //default response from the server
 $response = array("result" => "failde", "message" => "Could not process request.");
 
-$select = "select * from customer_table where customer_username='" . $customer_username . "'";
+$select = "select * from customer_table where ";
 $insert = "insert into customer_table (customer_name, customer_surname, customer_username, customer_email, password) Values ('".$customer_name ."','".$customer_surname."','".$customer_username."','".$customer_email."','".$customer_password."')";
 if(strlen($customer_name) == 0 && strlen($customer_surname) == 0){
-    // echo 'login';
     //perform login operation here
-    $result = mysqli_query($conn, $select);
+    $result = mysqli_query($conn, $select . "customer_username='" . $customer_username . "'");
     if(mysqli_num_rows($result) > 0){
         $row = mysqli_fetch_assoc($result);
         $rs_pword = $row["password"];
@@ -43,14 +43,15 @@ if(strlen($customer_name) == 0 && strlen($customer_surname) == 0){
         $response = array("result" => "failed", "message" => "User not found");
     }
 }else{
-    // echo 'register';
     // perform registration operation here
-    $result = mysqli_query($conn, $select);
-
+    $result = mysqli_query($conn, $select . "customer_username='" . $customer_username . "'");
     if(mysqli_num_rows($result) > 0){
         $response = array("result" => "failed", "message" => "The user name entered has been taken.");
     }else{
-        if($conn->query($insert) === TRUE){
+        $result = mysqli_query($conn, $select . "customer_email='" . $customer_email . "'");
+    if(mysqli_num_rows($result) > 0){
+        $response = array("result" => "failed", "message" => "The email address entered has been registered. Please login.");
+    }else if($conn->query($insert) === TRUE){
             $response = array("result" => "success");
         }else{
             $response = array("result" => "failed", "message" => "Failed registration.");

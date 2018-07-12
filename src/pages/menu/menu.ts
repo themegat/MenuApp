@@ -6,6 +6,7 @@ import { ItemDetailPage } from "../item-detail/item-detail";
 import { LoadingController } from "ionic-angular";
 import { Outlet} from '../../../interfaces/outlet';
 import { OutletDetailsPage} from '../outlet-details/outlet-details';
+import { CommonProvider } from '../../providers/common/common';
 
 @Component({
     selector: 'page-menu',
@@ -25,7 +26,8 @@ export class MenuPage {
     private outlet_list:Outlet[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
-        private http: HttpClient, private modalCtrl: ModalController, public loadCtrl: LoadingController) {
+        private http: HttpClient, private modalCtrl: ModalController, public loadCtrl: LoadingController,
+        private commonProvider: CommonProvider) {
         var restaurantName = navParams.get('data');
 
         this.loading = this.loadCtrl.create({ content: "Loading menu ,please wait..." });
@@ -37,8 +39,8 @@ export class MenuPage {
                 this.http.get(this.url + restaurant.name).subscribe(data => {
                     this.setDataLists(data, this.loading);
                 }, err => {
-                    console.log("OOPS");
-                    console.log(err);
+                    this.loading.dismiss();
+                    this.commonProvider.showAlert("Request faild. Please check your connection", "");
                 });
                 break;
             }

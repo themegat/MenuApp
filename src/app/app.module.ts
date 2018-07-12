@@ -12,6 +12,7 @@ import { ItemDetailPage } from '../pages/item-detail/item-detail';
 import { OutletDetailsPage } from '../pages/outlet-details/outlet-details';
 import { RestaurantsPage} from '../pages/restaurants/restaurants';
 import { RegisterPage} from '../pages/Register/register';
+import { CommonProvider } from '../providers/common/common';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RegisterPage} from '../pages/Register/register';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    CommonProvider
   ]
 })
 export class AppModule { }

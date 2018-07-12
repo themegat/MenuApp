@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,15 +12,24 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-
-.back-button{
+.back-button {
     color: white;
 }
 
-ion-title{
+ion-title {
     text-align: center;
 }
 
-.white_text{
+.white_text {
     color: white;
-  }
+}
+
+.btn_access {
+    width: 80%;
+    margin: -1% auto 4% auto;
+    background: #ea4a00;
+}
+
+.btn_access:hover {
+    background: #ea4a00 !important;
+}
