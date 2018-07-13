@@ -4,8 +4,8 @@ import { Menu } from 'ionic-angular/components/app/menu-interface';
 import { HttpClient } from '@angular/common/http';
 import { ItemDetailPage } from "../item-detail/item-detail";
 import { LoadingController } from "ionic-angular";
-import { Outlet} from '../../../interfaces/outlet';
-import { OutletDetailsPage} from '../outlet-details/outlet-details';
+import { Outlet } from '../../../interfaces/outlet';
+import { OutletDetailsPage } from '../outlet-details/outlet-details';
 import { CommonProvider } from '../../providers/common/common';
 
 @Component({
@@ -23,37 +23,57 @@ export class MenuPage {
     private temp_menu_list;
     private readonly url = "http://congos3.000webhostapp.com/menu.php?id=";
     public loading;
-    private outlet_list:Outlet[];
+    private outlet_list: Outlet[];
+    public imgLoadCount: number = 0;
+    private IMAGES_TO_LOAD;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
         private http: HttpClient, private modalCtrl: ModalController, public loadCtrl: LoadingController,
         private commonProvider: CommonProvider) {
         var restaurantName = navParams.get('data');
 
-        this.loading = this.loadCtrl.create({ content: "Loading menu ,please wait..." });
-        this.loading.present();
+        this.showLoader();
 
         for (let restaurant of this.RESTAURANT_LOGO) {
             if (restaurantName == restaurant.name) {
                 this.search_icon = restaurant.logoUrl;
-                this.http.get(this.url + restaurant.name).subscribe(data => {
-                    this.setDataLists(data, this.loading);
-                }, err => {
-                    this.loading.dismiss();
-                    this.commonProvider.showAlert("Request faild. Please check your connection", "");
-                });
+                if (sessionStorage.getItem(restaurantName) != null) {
+                    this.setDataLists(JSON.parse(sessionStorage.getItem(restaurantName)), this.loading);
+                } else {
+                    this.http.get(this.url + restaurant.name).subscribe(data => {
+                        sessionStorage.setItem(restaurantName, JSON.stringify(data));
+                        this.setDataLists(data, this.loading);
+                    }, err => {
+                        this.loading.dismiss();
+                        this.commonProvider.showAlert("Request faild. Please check your connection", "");
+                    });
+                }
                 break;
             }
         }
     }
 
     setDataLists(data, loader) {
+        this.IMAGES_TO_LOAD = data[0].menu.length;
         this.outlet_list = data[0].outlets;
         this.temp_menu_list = data[0].menu;
         this.menu_list = this.temp_menu_list;
-        setTimeout(function(){
-            loader.dismiss();
-        }, 5000);
+    }
+
+    showLoader() {
+        this.loading = this.loadCtrl.create({ content: "Loading menu ,please wait..." });
+        this.loading.present();
+    }
+
+    notifyLoader() {
+        this.imgLoadCount++;
+
+        if (this.imgLoadCount >= (this.IMAGES_TO_LOAD - 3)) {
+            if(this.loading){
+                this.loading.dismiss();
+                this.loading = null;
+            }        
+        }
     }
 
     filterMenuList(searchBar) {
@@ -81,8 +101,8 @@ export class MenuPage {
         modal.present();
     }
 
-    openOutletDetails(){
-        var modal = this.modalCtrl.create(OutletDetailsPage, {outlets:this.outlet_list});
+    openOutletDetails() {
+        var modal = this.modalCtrl.create(OutletDetailsPage, { outlets: this.outlet_list });
         modal.present();
     }
 }

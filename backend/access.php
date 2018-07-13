@@ -19,14 +19,16 @@ $db = "id6406501_menu_app_db";
 //establish a connection to the database
 $conn = new mysqli($url, $username, $password, $db);
 if($conn->connect_error){
-    echo "Failed to connect";
+    $response = array("result" => "failde", "message" => "Failed to connect");
 }else{
 //if customer name and surname are empty, consider it as a login, else consider it as a registration request.
 
 //default response from the server
 $response = array("result" => "failde", "message" => "Could not process request.");
-
-$select = "select * from customer_table where ";
+$customer_username = strtolower($customer_username);
+echo $customer_username;
+$customer_email = strtolower($customer_email);
+$select = "select customer_name, customer_surname, LOWER(customer_username) AS customer_username, LOWER(customer_email) AS customer_email, password from customer_table where ";
 $insert = "insert into customer_table (customer_name, customer_surname, customer_username, customer_email, password) Values ('".$customer_name ."','".$customer_surname."','".$customer_username."','".$customer_email."','".$customer_password."')";
 if(strlen($customer_name) == 0 && strlen($customer_surname) == 0){
     //perform login operation here

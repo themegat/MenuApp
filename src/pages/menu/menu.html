@@ -10,7 +10,7 @@
     <div class="search_">
         <div class="search_bar">
             <ion-avatar item-start class="searcb_bar_icon">
-            <img  src="{{search_icon}}" />
+                <img src="{{search_icon}}" />
             </ion-avatar>
             <ion-searchbar (ionInput)="filterMenuList($event)" (ionClear)="resetMenuList()"></ion-searchbar>
         </div>
@@ -26,7 +26,7 @@
     <ion-list>
         <ion-item *ngFor="let item of menu_list" (click)="openItemDetails(item)">
             <ion-avatar item-start>
-                <img src={{item.image}} />
+                <img src={{item.image}} (load)="notifyLoader(this.test)" (error)="notifyLoader(this.test)" />
             </ion-avatar>
             <h2>
                 <b>{{item.name}}</b>

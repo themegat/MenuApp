@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AlertController} from 'ionic-angular';
-
+import { AlertController } from 'ionic-angular';
 /*
   Generated class for the CommonProvider provider.
 
@@ -11,17 +10,17 @@ import { AlertController} from 'ionic-angular';
 @Injectable()
 export class CommonProvider {
 
-  constructor(public http: HttpClient, public alertCtrl:AlertController) {
+  constructor(public http: HttpClient, public alertCtrl: AlertController) {
     // console.log('Hello CommonProvider Provider');
   }
 
-  showAlert(message:string, title:string){
-    if(title === "" || title == undefined){
+  showAlert(message: string, title: string) {
+    if (title === "" || title == undefined) {
       title = "Oops"
     }
     const alert = this.alertCtrl.create({
-      title:title,
-      subTitle:message,
+      title: title,
+      subTitle: message,
       buttons: ['Ok']
     });
     alert.present();
