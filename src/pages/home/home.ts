@@ -22,7 +22,7 @@ export class HomePage {
   Login() {
     try {
       if(this.username == undefined || this.username.length < 3){
-        throw "Enter a valid username";
+        // throw "Enter a valid username";
       }
 
       var parameters = "&username=" + this.username + "&password=" + this.password;
