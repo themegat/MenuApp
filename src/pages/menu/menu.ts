@@ -18,7 +18,10 @@ export class MenuPage {
     { name: "McDonalds", logoUrl: "assets/imgs/Mcdonalds_logo.png" },
     { name: "NANDOS", logoUrl: "assets/imgs/376px-Nandos_logo.svg.png" },
     { name: "DEBONAIRS", logoUrl: "assets/imgs/Debonaires-logo.jpg" },
-    { name: "STEERS", logoUrl: "assets/imgs/Steers_Logo.jpg" }]
+    { name: "STEERS", logoUrl: "assets/imgs/Steers_Logo.jpg" },
+    { name: "MYTHOS", logoUrl: "assets/imgs/mythos_logo.png" },
+    { name: "LUPA", logoUrl: "assets/imgs/Lupa.jpg" },
+    { name: "Piza_e_Vino", logoUrl: "assets/imgs/Piza_e_Vino__logo.png" }]
     public menu_list: Menu[];
     private temp_menu_list;
     private readonly url = "http://congos3.000webhostapp.com/menu.php?id=";
@@ -33,7 +36,7 @@ export class MenuPage {
         var restaurantName = navParams.get('data');
 
         this.showLoader();
-
+    
         for (let restaurant of this.RESTAURANT_LOGO) {
             if (restaurantName == restaurant.name) {
                 this.search_icon = restaurant.logoUrl;
@@ -68,7 +71,7 @@ export class MenuPage {
     notifyLoader() {
         this.imgLoadCount++;
 
-        if (this.imgLoadCount >= (this.IMAGES_TO_LOAD - 3)) {
+        if (this.imgLoadCount >= (this.IMAGES_TO_LOAD - 10)) {
             if(this.loading){
                 this.loading.dismiss();
                 this.loading = null;
