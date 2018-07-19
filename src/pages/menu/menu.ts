@@ -7,6 +7,7 @@ import { LoadingController } from "ionic-angular";
 import { Outlet } from '../../../interfaces/outlet';
 import { OutletDetailsPage } from '../outlet-details/outlet-details';
 import { CommonProvider } from '../../providers/common/common';
+// import * as $ from 'jquery';
 
 @Component({
     selector: 'page-menu',
@@ -36,7 +37,7 @@ export class MenuPage {
         var restaurantName = navParams.get('data');
 
         this.showLoader();
-    
+
         for (let restaurant of this.RESTAURANT_LOGO) {
             if (restaurantName == restaurant.name) {
                 this.search_icon = restaurant.logoUrl;
@@ -56,11 +57,57 @@ export class MenuPage {
         }
     }
 
+    // onScroll(event) {
+    //     var dd = $('.lazy')['src'];
+    //     // if (dd != undefined) {
+    //     //     if (dd.offset().top < 50) {
+    //     //         dd.removeClass('lazy');
+    //     //     }
+    //     // }
+    //     console.log("scollinh");
+    //     console.log(dd);
+    // }
+
+    // setLazyLoad() {
+    //     console.log("Not");
+    //     console.log($('#btnOrder'));
+    //     $(window).scroll(function () {
+    //         console.log('scrolling');
+    //     })
+    //     // ("DOMContentLoaded", function () {
+    //     //     var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+    //     //     if ("IntersectionObserver" in window) {
+    //     //         console.log("Is available");
+    //     //         let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+    //     //             entries.forEach(function (entry) {
+    //     //                 if (entry.isIntersecting) {
+    //     //                     console.log("in view");
+    //     //                     let lazyImage: any = entry.target;
+    //     //                     lazyImage.src = lazyImage.dataset.src;
+    //     //                     // lazyImage.srcset = lazyImage.dataset.srcset;
+    //     //                     lazyImage.classList.remove("lazy");
+    //     //                     lazyImageObserver.unobserve(lazyImage);
+    //     //                 }
+    //     //             });
+    //     //         });
+
+    //     //         lazyImages.forEach(function (lazyImage) {
+    //     //             lazyImageObserver.observe(lazyImage);
+    //     //         });
+    //     //     }else{
+    //     //         console.log("Not available");
+    //     //     }
+    //     // });
+
+    // }
+
     setDataLists(data, loader) {
         this.IMAGES_TO_LOAD = data[0].menu.length;
         this.outlet_list = data[0].outlets;
         this.temp_menu_list = data[0].menu;
         this.menu_list = this.temp_menu_list;
+
     }
 
     showLoader() {
@@ -72,27 +119,44 @@ export class MenuPage {
         this.imgLoadCount++;
 
         if (this.imgLoadCount >= (this.IMAGES_TO_LOAD - 10)) {
-            if(this.loading){
+            if (this.loading) {
                 this.loading.dismiss();
                 this.loading = null;
-            }        
+            }
         }
     }
 
     filterMenuList(searchBar) {
         var filter = searchBar.target.value;
-
-        if (filter !== "") {
+        var arFilter = filter.split(" ");
+        console.log(arFilter);
+        if (arFilter.length > 0 && arFilter[0] !== "") {
             this.menu_list = [];
-            for (let item of this.temp_menu_list) {
-                if (item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
-                    item.category.toLowerCase().indexOf(filter.toLowerCase()) > -1) {
-                    this.menu_list.push(item);
+            for (let f of arFilter) {
+                if (f !== "") {
+                    for (let item of this.temp_menu_list) {
+                        if (item.name.toLowerCase().indexOf(f.toLowerCase()) > -1 ||
+                            item.category.toLowerCase().indexOf(f.toLowerCase()) > -1 ||
+                            item.description.toLowerCase().indexOf(f.toLowerCase()) > -1) {
+                            this.menu_list.push(item);
+                        }
+                    }
                 }
             }
         } else {
             this.menu_list = this.temp_menu_list;
         }
+        // if (filter !== "") {
+        // this.menu_list = [];
+        // for (let item of this.temp_menu_list) {
+        //     if (item.name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
+        //         item.category.toLowerCase().indexOf(filter.toLowerCase()) > -1) {
+        //         this.menu_list.push(item);
+        //     }
+        // }
+        // } else {
+        //     this.menu_list = this.temp_menu_list;
+        // }
     }
 
     resetMenuList() {
